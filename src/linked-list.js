@@ -37,7 +37,7 @@ class LinkedList {
 		var Node = this._head;
 		var i = 0;
 		
-		if ( index < 0 || index > this.length - 1) {
+		if ( index < 0 || index > this.length) {
 			return;
 		}
 		
@@ -69,9 +69,9 @@ class LinkedList {
 			this._head = el;
 			this.length++;
 		}
-		else if (index == this.length - 1) {
+		else if (index == this.length) {
 			this.append(data);
-		}
+		} 
 		else {
 			el.prev = _Node.prev;
 			el.next = _Node;
@@ -79,7 +79,7 @@ class LinkedList {
 			_Node.prev = el;
 			this.length++;
 		}
-		return;
+		return el.data;
 		
 		
 	}
