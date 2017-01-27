@@ -4,14 +4,13 @@ class LinkedList {
 	
       constructor() {
 		this.length = 0;
-		/* this._head = null;
-		this._tail = null; */
+		
 	}
 	
 
     append(data) {
 		var el = new Node(data);
-		console.log (this._head instanceof Node);
+		
 		
 		if (this.isEmpty()) {
 			this._head = this._tail = el;
@@ -37,7 +36,7 @@ class LinkedList {
 		var Node = this._head;
 		var i = 0;
 		
-		if ( index < 0 || index > this.length) {
+		if ( index < 0 || index > this.length - 1) {
 			return;
 		}
 		
@@ -51,7 +50,6 @@ class LinkedList {
 
     insertAt(index, data) {
 		var el = new Node(data);
-		
 		if (index < 0 || index > this.length - 1) {
 			return;
 		}
@@ -88,14 +86,72 @@ class LinkedList {
 		return this.length == 0 ? true : false;
 	}
 
-    clear() {}
-
-    deleteAt(index) {
+    clear() {
+		this._head.data = null;
+		this._tail.data = null;
+		this.length = 0;
+		return this;
 	}
 
-    reverse() {}
+    deleteAt(index) {
+		if (index == 0) {
+			this._head.data = null;
+			this._head.next = this._head;
+			this._head.prev = null;
+			this.length--;
+			return this;
+		}
+		if (index == this.length) {
+			this._tail.data = null;
+			this._tail.prev = this._tail;
+			this._tail.next = null;
+			this.length--;
+			return this;
+		}
+		
+		var _Node = this._head;
+		var i = 0;
+		
+		if ( index < 0 || index > this.length) {
+			return;
+		}
+		
+		while (i != index) {
+			_Node = _Node.next;
+			i++;
+		}
+		
+		_Node.data = null;
+		_Node.prev.next = _Node.next;
+		_Node.next.prev = _Node.prev;
+		return this;
+	}
 
-    indexOf(data) {}
+    reverse() {
+		var help = [];
+		var _Node = this._head;
+		for (var i = 0; i < this.length; i++) {
+			help[i] = _Node.data;
+			_Node = _Node.next;
+		}
+		help.reverse();
+		_Node = this._head;
+		for (var i = 0; i < help.length; i++) {
+			_Node.data = help[i];
+			_Node = _Node.next;
+		}
+		return this;
+	}
+
+    indexOf(data) {
+		var _Node = this._head;
+		for (var i = 0; i < this.length - 1; i++) {
+			if (_Node.data == data) return i;
+			_Node = _Node.next;
+		}
+		if (_Node.data === data) return i;
+		else return -1;
+	}
 	
 }
 
