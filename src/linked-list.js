@@ -124,6 +124,7 @@ class LinkedList {
 		_Node.data = null;
 		_Node.prev.next = _Node.next;
 		_Node.next.prev = _Node.prev;
+		this.length--;
 		return this;
 	}
 
